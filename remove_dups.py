@@ -99,6 +99,10 @@ def main(
             elif mode == "s":
                 mode_flag = "Split"
                 assigned_folder = (i % folder_to_create) + 1
+                width = 3
+                assigned_folder = str(assigned_folder).rjust(
+                    width, "0"
+                )  # add three zero
                 new_file = (
                     str(assigned_folder) + "\\" + "_n_" + short_hash_text + file_type_
                 ).upper()  # with folder as prefix
