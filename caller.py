@@ -112,6 +112,10 @@ def start_program(min_size, max_size):
 
 if __name__ == "__main__":
     while True:
-        start_small()
-        # start_medium()
-        # start_large()
+        mode_size = input("Enter File Size (s,m,l): ")
+        if mode_size == "s":
+            start_small()
+        elif mode_size == "m":
+            start_medium()
+        elif mode_size == "l":
+            start_large()
