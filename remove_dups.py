@@ -44,8 +44,8 @@ def main(
     destination_path,
     file_type,
     hash_type="SHA1",
-    min_size=1_000_000,
-    max_size=10_000_000,
+    min_size=100_000,
+    max_size=1_000_000_000,
     selected_mode="l",
     number_of_folders=1,
 ):
@@ -57,6 +57,10 @@ def main(
 
     mode = selected_mode  # input("Enter Mode(l list, c copy, s split): ")
     folder_to_create = number_of_folders  # int(input("Enter # of Folders (1-10): "))
+
+    if mode == "s":
+        default_prefix = "U"
+        folder_prefix = input("Enter Folder Prefix: ") or default_prefix
 
     for i, old_file in enumerate(file_list):
         # print(f" Assigned folder: {assigned_folder} file: {i+1} ")
@@ -100,18 +104,22 @@ def main(
                 mode_flag = "Split"
                 assigned_folder = (i % folder_to_create) + 1
                 width = 3
-                assigned_folder = str(assigned_folder).rjust(
+                assigned_folder = folder_prefix + str(assigned_folder).rjust(
                     width, "0"
                 )  # add three zero
                 new_file = (
-                    str(assigned_folder) + "\\" + "_n_" + short_hash_text + file_type_
+                    str(assigned_folder)
+                    + "\\"
+                    + "_n_"
+                    + short_hash_text
+                    + old_extension
                 ).upper()  # with folder as prefix
                 new_full_path = destination_path + "\\" + new_file
                 # Create Folders
                 for f in range(folder_to_create):
                     new_folder = destination_path + "\\" + str(f + 1)
-                    if not os.path.exists(new_folder):
-                        os.makedirs(new_folder)
+                    if not os.path.exists(assigned_folder):
+                        os.makedirs(assigned_folder)
                 try:
                     # shutil.copy(old_file, new_full_path)
                     shutil.move(old_file, new_full_path)

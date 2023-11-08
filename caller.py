@@ -45,21 +45,41 @@ def split_files(source, file_type, min_size, max_size, folder):
     )
 
 
-def start_program():
+def start_small():
+    min_size = 1_000_000
+    max_size = 10_000_000
+    start_program(min_size, max_size)
+
+
+def start_medium():
+    min_size = 10_000_000
+    max_size = 100_000_000
+    start_program(min_size, max_size)
+
+
+def start_large():
+    min_size = 100_000_000
+    max_size = 10_000_000_000
+    start_program(min_size, max_size)
+
+
+def start_program(min_size, max_size):
     print()
-    source = r"C:\Users\vsayakanit\OneDrive - Pittsburgh Water and Sewer Authority\Pictures\Camera Roll\\2021"
+    source = r"C:\Users\vsayakanit\OneDrive - Pittsburgh Water and Sewer Authority\Pictures\Camera Roll\2022"
     print(source)
     output = r"C:\Users\vsayakanit\OneDrive - Pittsburgh Water and Sewer Authority\Temp_Delete_Any_Time"
     print(output)
     # file_type = ["MP4"]
     file_type = ["M??"]  # using wildcard ??
     # file_type = ["MP4", "MOV", "AVI", "MPG", "MKV", "WMV", "WebM"]
-    print(file_type)
-    min_size = 10_000
-    print(min_size)
-    max_size = 1000_000_000
-    print(max_size)
-    mode = input("Enter Mode(l list, c copy, s split): ")
+    print(f"File Extension: {file_type}")
+    min_size = 1_000_000
+    print(f"File Min Size: {min_size:,}")
+    max_size = 10_000_000
+    print(f"File Max Size: {max_size:,}")
+    print()
+    mode = input("Enter Mode(l list, c copy, s split, f count files): ")
+    print()
 
     for ext in file_type:
         print("-" * 140)
@@ -73,20 +93,22 @@ def start_program():
             elapsed_time = end - start
             print(f"Time: {elapsed_time}")
         elif mode == "s":
-            number_of_folder = int(input("Enter Folder (1-10):"))
+            number_of_folder = int(input("Enter Folder (1-99): "))
             split_files(output, ext, min_size, max_size, number_of_folder)
         elif mode == "f":
             path = output
             # limit = 100
+            print()
 
             for root, dirs, files in os.walk(path):
                 for dir in dirs:
                     dir_path = os.path.join(root, dir)
                     file_count = len(os.listdir(dir_path))
-                    print()
                     print(f"{dir} has {file_count} files.")
 
 
 if __name__ == "__main__":
     while True:
-        start_program()
+        start_small()
+        # start_medium
+        # start_large()
