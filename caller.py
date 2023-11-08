@@ -46,18 +46,21 @@ def split_files(source, file_type, min_size, max_size, folder):
 
 
 def start_small():
+    print("Small")
     min_size = 1_000_000
     max_size = 10_000_000
     start_program(min_size, max_size)
 
 
 def start_medium():
+    print("Medium")
     min_size = 10_000_000
     max_size = 100_000_000
     start_program(min_size, max_size)
 
 
 def start_large():
+    print("Large")
     min_size = 100_000_000
     max_size = 10_000_000_000
     start_program(min_size, max_size)
@@ -73,9 +76,9 @@ def start_program(min_size, max_size):
     file_type = ["M??"]  # using wildcard ??
     # file_type = ["MP4", "MOV", "AVI", "MPG", "MKV", "WMV", "WebM"]
     print(f"File Extension: {file_type}")
-    min_size = 1_000_000
+    min_size = min_size
     print(f"File Min Size: {min_size:,}")
-    max_size = 10_000_000
+    max_size = max_size
     print(f"File Max Size: {max_size:,}")
     print()
     mode = input("Enter Mode(l list, c copy, s split, f count files): ")
@@ -110,5 +113,5 @@ def start_program(min_size, max_size):
 if __name__ == "__main__":
     while True:
         start_small()
-        # start_medium
+        # start_medium()
         # start_large()
